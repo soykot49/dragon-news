@@ -2,6 +2,7 @@
 import { createBrowserRouter, Navigate } from "react-router-dom";
 import Home from "../layout/Home";
 import CategoryNews from "../pages/CategoryNews";
+import AuthLayout from "../layout/AuthLayout";
 
 const router = createBrowserRouter([
     {
@@ -17,7 +18,7 @@ const router = createBrowserRouter([
                 element: <CategoryNews></CategoryNews>,
                 loader: async ({ params }) => {
                     const res = await fetch(`https://openapi.programming-hero.com/api/news/category/${params.id}`);
-                    
+
                     if (!res.ok) {
                         throw new Error(`Failed to fetch data: ${res.status}`);
                     }
@@ -32,6 +33,21 @@ const router = createBrowserRouter([
     {
         path: '/news',
         element: <h1>News</h1>
+    },
+    {
+        path: '/auth',
+        element: <AuthLayout></AuthLayout>,
+        children: [{
+            path: '/auth/login',
+            element: <h2>login</h2>
+        },
+        {
+            path:'/auth/register',
+            element:<h2>Register</h2>
+
+        }]
+
+
     },
     {
         path: '/login',
