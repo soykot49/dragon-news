@@ -4,7 +4,7 @@ import { useContext } from "react";
 import { Authcontext } from "../provider/Authprovider";
 
 const Navbar = () => {
-    const {user} = useContext(Authcontext)
+    const {user , logOut} = useContext(Authcontext)
     return (
         <div className="flex justify-between item-center">
             <div>{user && user.name}</div>
@@ -19,7 +19,10 @@ const Navbar = () => {
                     <img src={userIcon} alt="" />
                     
                 </div>
-                <Link to='/auth/login' className="btn btn-neutral rounded-none">Login</Link>
+                {
+                    user && user?.email ? <button onClick={logOut} className="btn btn-neutral rounded-none">Log Out</button> :  <Link to='/auth/login' className="btn btn-neutral rounded-none">Login</Link>
+                }
+               
 
             </div>
         </div>
